@@ -15,7 +15,7 @@ var server = http.createServer( function( req, res ) {
 console.log('--Server started.--');
 
 app.use(express.static('public'));
-var jsonParser = bodyParser.json();
+//var jsonParser = bodyParser.json();
 
 
 /*
