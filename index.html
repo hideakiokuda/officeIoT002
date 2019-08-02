@@ -158,17 +158,12 @@
 
 
 
-    ioSocket.on('postdata' , function() {} );
-/*
-        if(usermessage.nickname == "sensor"){
-            document.form3.textbox3.value = usermessage.content;
+    ioSocket.on('postdata' , function(data) {sendMsgDummy(data)} );
+    function sendMsgDummy(data){
+        if(data.nickname == "sensor"){
+            document.form3.textbox3.value = data.content;
         }
-*/
-
-
-
-
-
+    }
 
 
     </script>
