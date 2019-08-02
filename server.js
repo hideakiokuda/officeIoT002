@@ -29,8 +29,11 @@ app.get('/', function (req, res) {
 // POST method route
 app.post('/sensor',jsonParser,function (req, res) {
   res.send('POST request received by server');
+  console.log('post1');
   var decoded_payload = new Buffer(req.body.payload_raw, 'base64').toString('ascii')
+  console.log('post2');
   sendMessage({ content:decoded_payload, nickname:"sensor"});
+  console.log('post3');
   console.log(req.body);
   console.log(decoded_payload);
 })
