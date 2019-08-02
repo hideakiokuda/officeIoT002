@@ -1,3 +1,6 @@
+var express = require('express')
+var app = express();
+
 var http = require( 'http' ); // HTTPモジュール読み込み
 var socketio = require( 'socket.io' ); // Socket.IOモジュール読み込み
 var fs = require( 'fs' ); // ファイル入出力モジュール読み込み
@@ -8,11 +11,6 @@ var server = http.createServer( function( req, res ) {
     res.end( fs.readFileSync('./index.html', 'utf-8') );  // index.htmlの内容を出力
 }).listen(process.env.PORT || 3000);
 console.log('--Server started.--');
-
-
-
-var express = require('express')
-var app = express();
 
 app.use(express.static('public'));
 
