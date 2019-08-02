@@ -6,16 +6,8 @@
   "scripts": {
     "start": "node ./server.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/hideakiokuda/officeIoT002.git"
-  },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/hideakiokuda/officeIoT002/issues"
-  },
-  "homepage": "https://github.com/hideakiokuda/officeIoT002#readme",
   "dependencies": {
     "express": "^4.17.1",
     "socket.io": "^2.2.0"
