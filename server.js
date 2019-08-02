@@ -73,9 +73,9 @@ io.sockets.on( 'connection', function( socket ) {
 
 
     socket.on( 'connection', function( data ) {
-        console.log('connection');
+        console.log('postdata');
     //
-    io.sockets.emit('new message' , message);
+    io.sockets.emit('postdata' , message);
     });
 
 
