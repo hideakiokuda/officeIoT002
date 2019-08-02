@@ -20,6 +20,8 @@ app.get('/', function (req, res) {
   res.send('GET request to the homepage')
 })
 
+
+/*
 // POST method route
 app.post('/sensor',jsonParser,function (req, res) {
   res.send('POST request received by server');
@@ -28,6 +30,7 @@ app.post('/sensor',jsonParser,function (req, res) {
   console.log(req.body);
   console.log(decoded_payload);
 })
+*/
 
 // サーバーをソケットに紐付ける
 var io = socketio.listen( server );
