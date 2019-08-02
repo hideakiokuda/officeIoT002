@@ -157,20 +157,15 @@
     }
 
 
-/*
 
     socket.on('new message' , function(usermessage){
-        beep.play();    // Play a beep
 
-        if(usermessage.nickname == "sensor" && usermessage.content=="open"){
-          $imgA.show()
-          $imgB.hide()
-        }else{
-          $imgA.hide()
-          $imgB.show()
+        if(usermessage.nickname == "sensor"){
+            document.form3.textbox3.value = usermessage.content;
         }
 
-*/
+    }
+
 
 
 
