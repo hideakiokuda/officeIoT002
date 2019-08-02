@@ -73,6 +73,8 @@ io.sockets.on( 'connection', function( socket ) {
     io.sockets.emit( 'rtn4_message', { value : data.value } );
     });
 
+    socket.on('send message' , sendMessage);
+
 /*
     socket.on( 'connection', function( data ) {
         console.log('postdata');
