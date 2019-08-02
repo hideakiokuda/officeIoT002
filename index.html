@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <style>
+    #messageForm {
+        margin-top: 15px;
+    }
+    </style>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="messageForm">
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary" id="sendMessageBtn1">ボタン1</button>
+                        <button type="button" class="btn btn-primary" id="sendMessageBtn2">ボタン2</button>
+                        <button type="button" class="btn btn-primary" id="sendMessageBtn3">ボタン3</button>
+                        <button type="button" class="btn btn-primary" id="sendMessageBtn4">ボタン4</button>
+                    </div>
+                </form>
+                <div id="messageView"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-4">
+                <form name="form1">
+                    <div class="form-group">
+                        <input name="textbox1" type="text" class="form-control" id="messageForm">
+                    </div>
+                </form>
+                <div id="messageView"></div>
+            </div>
+            <div class="col-md-4">
+                <form name="form2">
+                    <div class="form-group">
+                        <input name="textbox2" type="text" class="form-control" id="messageForm">
+                    </div>
+                </form>
+                <div id="messageView"></div>
+            </div>
+            <div class="col-md-4">
+                <form name="form3">
+                    <div class="form-group">
+                        <input name="textbox3" type="text" class="form-control" id="messageForm">
+                    </div>
+                </form>
+                <div id="messageView"></div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="container">
+
+        <div class="row">
+            <form name="form4">
+                <p>
+                    テスト:
+                    <meter id="mtr1" value="5" min="0" max="10" low="2" high="8" optimum="10">0</meter>
+                    <output id="mtrv1">0</output>
+                </p>
+            </form>
+        </div>
+
+    </div>
+
+
+
+
+    <script type="text/javascript">
+
+    //var ioSocket = io.connect( "http://localhost:3000" ); // チャットサーバーに接続
+    var ioSocket = io.connect( ); // チャットサーバーに接続
+
+    // サーバーからのデータ受け取り処理
+    ioSocket.on( "connect", function() {} ); // 接続
+    ioSocket.on( "disconnect", function() {} ); // 切断
+
+
+    // ボタン1をクリック
+    $("#sendMessageBtn1").click( function() {
+        // メッセージの内容を取得し、その後フォームをクリア
+        var message = $("#messageForm").val();
+        $("#messageForm").val("");
+        // クライアントからサーバーへ送信
+        ioSocket.emit( "btn1_message", { value : message } );
+        console.log('Click button1.');
+    });
+
+    // ボタン1に関するサーバーからクライアントへの送り返し
+    ioSocket.on( "rtn1_message", function( data ) { sendMsgBtn1( data.value ) });
+    function sendMsgBtn1(text) {
+        document.form1.textbox1.value = text;
+    }
+
+    // ボタン2をクリック
+    $("#sendMessageBtn2").click( function() {
+        // メッセージの内容を取得し、その後フォームをクリア
+        var message = $("#messageForm").val();
+        $("#messageForm").val("");
+        // クライアントからサーバーへ送信
+        ioSocket.emit( "btn2_message", { value : message } );
+    });
+
+    // ボタン2に関するサーバーからクライアントへの送り返し
+    ioSocket.on( "rtn2_message", function( data ) { sendMsgBtn2( data.value ) });
+    function sendMsgBtn2(text) {
+        document.form2.textbox2.value = text;
+    }
+
+    // ボタン3をクリック
+    $("#sendMessageBtn3").click( function() {
+        // メッセージの内容を取得し、その後フォームをクリア
+        var message = $("#messageForm").val();
+        $("#messageForm").val("");
+        // クライアントからサーバーへ送信
+        ioSocket.emit( "btn3_message", { value : message } );
+    });
+
+    // ボタン3に関するサーバーからクライアントへの送り返し
+    ioSocket.on( "rtn3_message", function( data ) { sendMsgBtn3( data.value ) });
+    function sendMsgBtn3(text) {
+        document.form3.textbox3.value = text;
+    }
+
+    // ボタン4をクリック
+    $("#sendMessageBtn4").click( function() {
+        // メッセージの内容を取得し、その後フォームをクリア
+        var message = $("#messageForm").val();
+        $("#messageForm").val("");
+        // クライアントからサーバーへ送信
+        ioSocket.emit( "btn4_message", { value : message } );
+    });
+
+    // ボタン4に関するサーバーからクライアントへの送り返し
+    ioSocket.on( "rtn4_message", function( data ) { sendMsgBtn4( data.value ) });
+    function sendMsgBtn4(text) {
+        var gage = document.getElementById("mtr1");
+	    gage.value = text;
+        var gagev = document.getElementById("mtrv1");
+	    gagev.value = text;
+    }
+
+
+    </script>
+
+</body>
+</html>
