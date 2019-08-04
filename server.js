@@ -1,3 +1,4 @@
+/*
 var express = require('express')
 var app = express();
 
@@ -6,6 +7,11 @@ var socketio = require( 'socket.io' ); // Socket.IOモジュール読み込み
 var fs = require( 'fs' ); // ファイル入出力モジュール読み込み
 
 var bodyParser = require('body-parser');
+connectedUsers = [];
+
+app.use(express.static('public'));
+var jsonParser = bodyParser.json();
+
 
 // 3000番ポートでHTTPサーバーを立てる
 var server = http.createServer( function( req, res ) {
@@ -13,34 +19,48 @@ var server = http.createServer( function( req, res ) {
     res.end( fs.readFileSync('./index.html', 'utf-8') );  // index.htmlの内容を出力
 }).listen(process.env.PORT || 3000);
 console.log('--Server started.--');
+*/
+
+
+var express = require('express')
+var app = express();
+var server = require('http').createServer(app);
+var io = require('socket.io').listen(server);
+var bodyParser = require('body-parser');
+connectedUsers = [];
 
 app.use(express.static('public'));
-var jsonParser = bodyParser.json();
+var jsonParser = bodyParser.json()
+server.listen(process.env.PORT || 3000);
+console.log('Server started.');
 
 
 
+
+
+
+/*
 // GET method route
 app.get('/', function (req, res) {
   res.send('GET request to the homepage')
+  console.log('get');
 })
-
+*/
 
 
 // POST method route
-app.post('/sensor',jsonParser,function (req, res) {
+app.post('/send',jsonParser,function (req, res) {
+  console.log('post');
   res.send('POST request received by server');
-  console.log('post1');
   var decoded_payload = new Buffer(req.body.payload_raw, 'base64').toString('ascii')
-  console.log('post2');
-  sendMessage({ content:decoded_payload, nickname:"sensor"});
-  console.log('post3');
+  sendMessag({ content:decoded_payload, nickname:"sensor"});
   console.log(req.body);
   console.log(decoded_payload);
 })
 
 
 // サーバーをソケットに紐付ける
-var io = socketio.listen( server );
+////var io = socketio.listen( server );
 
 // 接続確立後の通信処理部分を定義
 io.sockets.on( 'connection', function( socket ) {
@@ -76,7 +96,7 @@ io.sockets.on( 'connection', function( socket ) {
     io.sockets.emit( 'rtn4_message', { value : data.value } );
     });
 
-    socket.on('send message' , sendMessage);
+    socket.on('send message' , sendMessag);
 
 /*
     socket.on( 'connection', function( data ) {
@@ -88,7 +108,7 @@ io.sockets.on( 'connection', function( socket ) {
 
 });
 
-function sendMessage(message){
+function sendMessag(message){
     console.log('postdata');
     io.sockets.emit('postdata' , message);
 }
