@@ -54,9 +54,9 @@ app.post('/send',jsonParser,function (req, res) {
   res.send('POST request received by server');
   var decoded_payload = new Buffer(req.body.payload_raw, 'base64').toString('ascii')
   sendMessag({ content:decoded_payload, nickname:"sensor"});
-  console.log("req.body");
+  console.log('req.body');
   console.log(req.body);
-  console.log("decoded_payload");
+  console.log('decoded_payload');
   console.log(decoded_payload);
 })
 
