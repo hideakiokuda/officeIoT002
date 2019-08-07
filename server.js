@@ -47,7 +47,7 @@ app.get('/', function (req, res) {
 })
 */
 
-
+/*
 // POST method route
 app.post('/send',jsonParser,function (req, res) {
   console.log('post');
@@ -58,6 +58,22 @@ app.post('/send',jsonParser,function (req, res) {
   console.log(req.body);
   console.log('decoded_payload');
   console.log(decoded_payload);
+})
+*/
+
+
+// POST method route
+app.post('/send',jsonParser,function (req, res) {
+    if( req.body.hasOwnProperty('payload_raw') && req.body.hasOwnProperty('dev_id')){ //for ttn
+        console.log('post');
+        res.send('POST request received by server');
+        var decoded_payload = new Buffer(req.body.payload_raw, 'base64').toString('ascii')
+        sendMessag({ content:decoded_payload, nickname:"sensor"});
+        console.log('req.body');
+        console.log(req.body);
+        console.log('decoded_payload');
+        console.log(decoded_payload);
+    }
 })
 
 
